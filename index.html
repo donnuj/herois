@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gacha Infinite</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #8B0000, #FFD700);
+      color: white;
+    }
+    .tabs {
+      background: #111;
+      padding: 10px;
+      display: flex;
+      gap: 5px;
+    }
+    .tabs button {
+      background: #FFD700;
+      color: #8B0000;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .aba {
+      display: none;
+      padding: 20px;
+    }
+    .aba.ativa {
+      display: block;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .card {
+      background: #ffffff22;
+      border: 1px solid #ffffff44;
+      padding: 10px;
+      border-radius: 6px;
+      color: white;
+      min-width: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <button onclick="mudarAba('aba-herois')">Heróis</button>
+  </div>
+
+  <div id="aba-herois" class="aba ativa">
+    <h2>🧙 Heróis Invocados</h2>
+    <button onclick="invocarHeroi()">Invocar Novo Herói</button>
+    <div id="lista-herois" class="cards"></div>
+  </div>
+
+  <script type="module">
+    import { invocarHeroi, atualizarHerois } from './herois.js';
+
+    window.invocarHeroi = invocarHeroi;
+
+    window.mudarAba = (id) => {
+      document.querySelectorAll(".aba").forEach(a => a.classList.remove("ativa"));
+      document.getElementById(id).classList.add("ativa");
+    };
+
+    // inicializar
+    window.jogador = {
+      herois: []
+    };
+
+    window.salvarNoFirestore = () => {};
+    atualizarHerois();
+  </script>
+</body>
+</html>
